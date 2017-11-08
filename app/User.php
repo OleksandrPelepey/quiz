@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Quiz;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -26,4 +27,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * User quizzes
+     */
+    public function quizzes() {
+        return $this->hasMany(Quiz::class);
+    }
 }
