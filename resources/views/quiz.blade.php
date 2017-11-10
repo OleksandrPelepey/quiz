@@ -1,35 +1,34 @@
 @extends('layouts.app')
 
-
 @section('content')
     <div class="container">
-        <h2>{{ $user->name }}'s quizzes</h2>
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h1 class="h2">{{$quiz->name}}</h1>
+                        <hr>
+                        <button type="button" class="btn btn-primary">Start Quiz</button>
+                    </div>
 
-        <ul>
-            @foreach($user->quizzes as $quiz)
-                <li>
-                    <h4>{{ $quiz->name }}</h4>
-                    
-                    <ul>
-                        @foreach($quiz->questions as $question)
-                            <li>
-                                {{$question->body}}
-                                
-                                <ul>
-                                    <?php $answers = json_decode($question->answers); ?>
-                                    
-                                    @foreach($answers as $answer)
-                                        <li>
-                                            {{$answer->text}}
-                                            <b>{{$answer->is_correct}}</b>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </li>
-                        @endforeach
-                    </ul>
-                </li>
-            @endforeach
-        </ul>
+                    <div class="col-md-4">
+                        <h4 class="h3">Quiz statistic</h4>
+
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>Blah</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Blah</td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
