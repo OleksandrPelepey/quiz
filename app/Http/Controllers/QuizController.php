@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 class QuizController extends Controller
 {
+    public $quizzes_per_page = 5;
     /**
      * Create a new controller instance.
      *
@@ -16,32 +17,32 @@ class QuizController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->only(['myQuizzes']);
     }
 
     /**
      *
      */
     public function index() {
-        $user = Auth::user()->load('quizzes.questions');
+        $quizzes = Quiz::paginate($this->quizzes_per_page);
 
-        return view( 'quiz', compact(['user']) );
+        return view( 'quizzes', compact(['quizzes']) );
     }
 
     /**
      *
      */
-    public function userQuizes(User $user) {
-        $user->load('quizzes.questions');
+    public function userQuizzes(User $user) {
+        $quizzes = $user->quizzes()->paginate($this->quizzes_per_page);
 
-        return view( 'quizzes', ['quizzes' => $user->quizzes] );
+        return view( 'quizzes', ['quizzes' => $quizzes] );
     }
 
     /**
      *
      */
     public function myQuizzes() {
-        return $this->userQuizes( Auth::user() );
+        return $this->userQuizzes( Auth::user() );
     }
 
     /**
