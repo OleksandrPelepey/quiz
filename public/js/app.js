@@ -76,7 +76,45 @@ module.exports = __webpack_require__(36);
 /***/ 36:
 /***/ (function(module, exports) {
 
-(function ($) {})(jQuery);
+(function ($) {
+    'use strict';
+
+    var deleteQuestionSelector = '[data-delete-question]';
+
+    function getQuestionHtml() {
+        var index = getQuestionHtml.counter++;
+        var $questionTmpl = $('\n            <div class="question" data-quiz-question>\n                <input type="hidden" name="questions[' + index + '][answers]" value="[]">\n\n                <div class="form-group">\n                    <input type="text" name="questions[' + index + '][body]"\n                     class="form-control" placeholder="Question" required>\n                </div>\n\n                <div class="form-group text-right">\n                    <button type="button" class="btn btn-danger" data-delete-question>Delete</button>\n                </div>\n            </div>\n        ');
+
+        return $questionTmpl;
+    }
+
+    getQuestionHtml.counter = 0;
+
+    // function getQuestionHtml(question) {
+    //     $questionTmpl = $questionTmpl.clone();
+    //     $questionTmpl.find('[name="question[]"]').val(question.body);
+    // }
+
+    $('[data-quiz-questions-input]').each(function () {
+        var $questionsInput = $(this);
+        var $questionsWrap = $questionsInput.find('[data-quiz-questions-input-wrap]');
+        var $addQuestionBtns = $questionsInput.find('[data-add-question]');
+        // var $deleteQuestionBtns = $questionsInput.find(deleteQuestionSelector);
+        // var questions = $questionsInput.find('[name="questions"]').val();
+
+        $addQuestionBtns.click(function (e) {
+            e.preventDefault();
+            $questionsWrap.append(getQuestionHtml());
+        });
+
+        $questionsWrap.on('click', deleteQuestionSelector, function (e) {
+            e.preventDefault();
+            var $this = $(this);
+
+            $this.parents('[data-quiz-question]').remove();
+        });
+    });
+})(jQuery);
 
 /***/ })
 

@@ -8,20 +8,32 @@
                     <div class="col-md-8">
                         <h1 class="h2">{{$quiz->name}}</h1>
                         <hr>
-                        <button type="button" class="btn btn-primary">Start Quiz</button>
+                        <a href="#" class="btn btn-primary">Start Quiz</a>
+
+                        @if($quiz->is_mine())
+                        <a href="#" class="btn btn-warning">Edit</a>
+                        <a href="#" class="btn btn-danger">Delete</a>
+                        @endif
                     </div>
 
                     <div class="col-md-4">
-                        <h4 class="h3">Quiz statistic</h4>
-
                         <table class="table">
+                            <thead>
+                                <tr>
+                                    <th colspan="2" class="text-center">Quiz statistic</th>
+                                </tr>
+                            </thead>
                             <tbody>
                                 <tr>
-                                    <td>Blah</td>
+                                    <td>Best Result</td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td>Blah</td>
+                                    <td>Avarage Result</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Your result</td>
                                     <td></td>
                                 </tr>
                             </tbody>

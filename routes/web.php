@@ -21,4 +21,8 @@ Route::get('/user/{user}/quizzes', 'QuizController@userQuizzes')->name('user-qui
 
 Route::get('/my-quizzes', 'QuizController@myQuizzes')->name('my-quizzes');
 
+Route::get('/quiz/new', 'QuizController@newQuiz')->name('new-quiz');
+
+Route::post('/quiz/create', 'QuizController@create');
+
 Route::get('/quiz/{quiz}', 'QuizController@quiz')->name('quiz');
